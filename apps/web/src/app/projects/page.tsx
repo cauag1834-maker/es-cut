@@ -71,6 +71,8 @@ import { DEFAULT_LOGO_URL } from "@/site/brand";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { StudioUserMenu } from "@/components/studio-user-menu";
 import { MessageCircle } from "lucide-react";
+import { supabase } from "@/services/supabase-client";
+
 
 const formatProjectDuration = ({
 	duration,
@@ -142,6 +144,44 @@ export default function ProjectsPage() {
 	);
 }
 
+function WhatsAppCommunityButton() {
+	const [whatsappUrl, setWhatsappUrl] = useState("https://publicidadees.com.br/comunidade");
+
+	useEffect(() => {
+		supabase
+			.from("community_settings")
+			.select("upsell_subtitulo, redes_sociais")
+			.eq("id", "studio")
+			.maybeSingle()
+			.then(({ data }) => {
+				if (data?.upsell_subtitulo && data.upsell_subtitulo.startsWith("http")) {
+					setWhatsappUrl(data.upsell_subtitulo);
+				} else if (Array.isArray(data?.redes_sociais) && (data.redes_sociais[0] as any)?.url) {
+					setWhatsappUrl((data.redes_sociais[0] as any).url);
+				}
+			})
+			.catch(() => {});
+	}, []);
+
+	return (
+		<a
+			href={whatsappUrl}
+			target="_blank"
+			rel="noopener noreferrer"
+			className="hidden sm:inline-flex"
+		>
+			<Button
+				variant="outline"
+				size="sm"
+				className="h-9 gap-1.5 text-xs font-semibold border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10 cursor-pointer"
+			>
+				<MessageCircle className="size-3.5" />
+				<span>Comunidade WhatsApp</span>
+			</Button>
+		</a>
+	);
+}
+
 function ProjectsHeader() {
 	const { viewMode, isHydrated, setViewMode } = useProjectsStore();
 
@@ -204,21 +244,7 @@ function ProjectsHeader() {
 
 				<div className="flex items-center gap-2.5 md:gap-3">
 					<SearchBar className="hidden md:block" />
-					<Link
-						href="https://publicidadees.com.br/comunidade"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="hidden sm:inline-flex"
-					>
-						<Button
-							variant="outline"
-							size="sm"
-							className="h-9 gap-1.5 text-xs font-semibold border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10 cursor-pointer"
-						>
-							<MessageCircle className="size-3.5" />
-							<span>Comunidade WhatsApp</span>
-						</Button>
-					</Link>
+					<WhatsAppCommunityButton />
 					<ThemeToggle />
 					<StudioUserMenu />
 					<NewProjectButton />

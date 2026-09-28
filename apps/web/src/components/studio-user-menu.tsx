@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,10 +11,29 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useStudioAuth } from "@/components/auth-gate";
+import { supabase } from "@/services/supabase-client";
 import { MessageCircle, LogOut, ArrowUpRight } from "lucide-react";
 
 export function StudioUserMenu() {
 	const { user, signOut } = useStudioAuth();
+	const [whatsappUrl, setWhatsappUrl] = useState("https://publicidadees.com.br/comunidade");
+
+	useEffect(() => {
+		supabase
+			.from("community_settings")
+			.select("upsell_subtitulo, redes_sociais")
+			.eq("id", "studio")
+			.maybeSingle()
+			.then(({ data }) => {
+				if (data?.upsell_subtitulo && data.upsell_subtitulo.startsWith("http")) {
+					setWhatsappUrl(data.upsell_subtitulo);
+				} else if (Array.isArray(data?.redes_sociais) && (data.redes_sociais[0] as any)?.url) {
+					setWhatsappUrl((data.redes_sociais[0] as any).url);
+				}
+			})
+			.catch(() => {});
+	}, []);
+
 	if (!user) return null;
 
 	const name =
@@ -48,8 +68,8 @@ export function StudioUserMenu() {
 					<p className="text-xs font-semibold truncate text-foreground">{name}</p>
 					<p className="text-[11px] text-muted-foreground truncate">{user.email}</p>
 				</div>
-				<Link
-					href="https://publicidadees.com.br/comunidade"
+				<a
+					href={whatsappUrl}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
@@ -57,7 +77,7 @@ export function StudioUserMenu() {
 						<MessageCircle className="size-4 mr-2" />
 						Comunidade WhatsApp
 					</DropdownMenuItem>
-				</Link>
+				</a>
 				<Link
 					href="https://publicidadees.com.br/app"
 					target="_blank"
