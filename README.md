@@ -1,6 +1,6 @@
-# OpenCut (Legacy)
+# ES Cut — Editor de Vídeo do Publicidade ES
 
-This is the original OpenCut codebase. It's archived and no longer maintained.
+O editor de vídeo profissional no seu navegador para o ecossistema capixaba de comunicação.
 
 The rewrite is happening at [opencut-app/opencut](https://github.com/opencut-app/opencut).
 
