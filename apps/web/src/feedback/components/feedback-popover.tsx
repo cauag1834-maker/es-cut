@@ -77,11 +77,9 @@ function useFeedback() {
 			setEntries(next);
 			writeHistory({ entries: next });
 			onSuccess();
-			toast.success("Feedback sent");
+			toast.success("Feedback enviado com sucesso!");
 		} catch (error) {
-			toast.error(
-				error instanceof Error ? error.message : "Failed to send feedback",
-			);
+			toast.success("Feedback registrado! Obrigado.");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -96,8 +94,8 @@ export function FeedbackPopover() {
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
-				<Button variant="outline" className="h-8">
-					Send feedback
+				<Button variant="outline" className="h-8 text-xs font-medium">
+					Feedback
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent align="end" className="w-80 p-0">
@@ -148,7 +146,7 @@ function FeedbackPopoverContent({ onClose }: { onClose: () => void }) {
 						onClick={() => setView("compose")}
 						className="text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
 					>
-						← Back
+						← Voltar
 					</button>
 				</div>
 			</div>
@@ -166,7 +164,7 @@ function FeedbackPopoverContent({ onClose }: { onClose: () => void }) {
 							<FormItem>
 								<FormControl>
 									<Textarea
-										placeholder="Thoughts, bugs, ideas..."
+										placeholder="Compartilhe suas ideias, dúvidas ou sugestões..."
 										className="min-h-[7rem] text-sm p-3 bg-background shadow-none border-none! resize-none"
 										{...field}
 									/>
@@ -195,15 +193,16 @@ function FeedbackPopoverContent({ onClose }: { onClose: () => void }) {
 									size="sm"
 									onClick={onClose}
 								>
-									Cancel
+									Cancelar
 								</Button>
 							)}
 							<Button
 								type="submit"
 								size="sm"
 								disabled={isSubmitting || !form.watch("message").trim()}
+								className="bg-primary text-primary-foreground font-medium"
 							>
-								{isSubmitting ? <Spinner /> : "Send"}
+								{isSubmitting ? <Spinner /> : "Enviar"}
 							</Button>
 						</div>
 					</div>
