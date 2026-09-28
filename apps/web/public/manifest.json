@@ -1,6 +1,6 @@
 {
-	"name": "OpenCut",
-	"description": "A simple but powerful video editor that gets the job done. In your browser.",
+	"name": "ES Cut — Publicidade ES",
+	"description": "O editor de vídeo profissional no seu navegador da Publicidade ES.",
 	"display": "standalone",
 	"start_url": "/",
 	"icons": [
