@@ -31,20 +31,12 @@ export function Header() {
 
 	const links = [
 		{
-			label: "Roadmap",
-			href: "/roadmap",
+			label: "Portal Publicidade ES",
+			href: "https://publicidadees.com.br",
 		},
 		{
-			label: "Contributors",
-			href: "/contributors",
-		},
-		{
-			label: "Sponsors",
-			href: "/sponsors",
-		},
-		{
-			label: "Blog",
-			href: "/blog",
+			label: "Meus Projetos",
+			href: "/projects",
 		},
 	];
 
@@ -54,7 +46,7 @@ export function Header() {
 				<div className="relative z-10 flex items-center gap-6">
 					<ContextMenu>
 						<ContextMenuTrigger asChild>
-							<Link href="/" className="flex items-center gap-3">
+							<Link href="/projects" className="flex items-center gap-3">
 								<Image
 									src={DEFAULT_LOGO_URL}
 									alt="ES Cut Logo"
@@ -71,31 +63,16 @@ export function Header() {
 							</Link>
 						</ContextMenuTrigger>
 						<ContextMenuContent>
-							<ContextMenuItem
-								onClick={async () => {
-									const res = await fetch(DEFAULT_LOGO_URL);
-									const svg = await res.text();
-									await navigator.clipboard.writeText(svg);
-								}}
-							>
-								<HugeiconsIcon icon={Copy01Icon} />
-								Copy SVG
-							</ContextMenuItem>
-							<ContextMenuItem
-								onClick={() => {
-									const a = document.createElement("a");
-									a.href = DEFAULT_LOGO_URL;
-									a.download = "opencut-logo.svg";
-									a.click();
-								}}
-							>
-								<HugeiconsIcon icon={Download01Icon} />
-								Download SVG
-							</ContextMenuItem>
-							<Link href="/brand">
+							<Link href="https://publicidadees.com.br" target="_blank" rel="noopener noreferrer">
 								<ContextMenuItem>
 									<HugeiconsIcon icon={LinkSquare02Icon} />
-									Brand assets
+									Portal Publicidade ES
+								</ContextMenuItem>
+							</Link>
+							<Link href="/projects">
+								<ContextMenuItem>
+									<HugeiconsIcon icon={LinkSquare02Icon} />
+									Meus Projetos
 								</ContextMenuItem>
 							</Link>
 						</ContextMenuContent>
@@ -103,7 +80,7 @@ export function Header() {
 
 					<nav className="hidden items-center gap-4 md:flex">
 						{links.map((link) => (
-							<Link key={link.href} href={link.href}>
+							<Link key={link.href} href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
 								<Button variant="text" className="p-0 text-sm">
 									{link.label}
 								</Button>
@@ -124,15 +101,14 @@ export function Header() {
 						</Button>
 					</div>
 					<div className="hidden items-center gap-3 md:flex">
-						<Link href={SOCIAL_LINKS.github}>
+						<Link href="https://publicidadees.com.br" target="_blank" rel="noopener noreferrer">
 							<Button className="bg-background text-sm" variant="outline">
-								<HugeiconsIcon icon={GithubIcon} className="size-4" />
-								40k+
+								Publicidade ES
 							</Button>
 						</Link>
 						<Link href="/projects">
-							<Button className="text-sm">
-								Projects
+							<Button className="text-sm bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+								Abrir Editor
 								<ArrowRight className="size-4" />
 							</Button>
 						</Link>

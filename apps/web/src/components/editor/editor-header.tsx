@@ -139,13 +139,13 @@ function ProjectDropdown() {
 
 					<DropdownMenuSeparator />
 
-					<DropdownMenuItem asChild icon={<FaDiscord className="size-4!" />}>
+					<DropdownMenuItem asChild>
 						<Link
-							href={SOCIAL_LINKS.discord}
+							href="https://publicidadees.com.br"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							Discord
+							Portal Publicidade ES
 						</Link>
 					</DropdownMenuItem>
 				</DropdownMenuContent>

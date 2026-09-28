@@ -103,6 +103,22 @@ export async function processMediaAssets({
 			continue;
 		}
 
+		// Limite de segurança para processamento local no navegador
+		// Evita esgotamento da memória RAM da aba do navegador com vídeos gigantes
+		const MAX_RECOMMENDED_BYTES = 1.5 * 1024 * 1024 * 1024; // 1.5 GB
+		if (file.size > MAX_RECOMMENDED_BYTES) {
+			toast.error(`Arquivo muito pesado: ${file.name} (${formatStorageBytes({ bytes: file.size })})`, {
+				description: "Para manter a edição fluida e não travar a memória do seu navegador, o limite recomendado é de 1.5 GB por arquivo. Dica: comprima o vídeo ou reduza a resolução antes de importar.",
+				duration: 8000,
+			});
+			continue;
+		} else if (file.size > 800 * 1024 * 1024) {
+			toast.warning(`Vídeo grande detectado: ${file.name} (${formatStorageBytes({ bytes: file.size })})`, {
+				description: "O processamento é 100% no seu dispositivo (zero servidor). Vídeos volumosos exigem mais memória local.",
+				duration: 6000,
+			});
+		}
+
 		const storageCheck = await storageService.canStoreFile({
 			size: file.size,
 		});

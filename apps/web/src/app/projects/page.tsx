@@ -67,6 +67,8 @@ import { ProjectInfoDialog } from "@/project/components/project-info-dialog";
 import { RenameProjectDialog } from "@/project/components/rename-project-dialog";
 import { cn } from "@/utils/ui";
 import { ChangelogNotification } from "@/changelog/components/changelog-notification";
+import { DEFAULT_LOGO_URL } from "@/site/brand";
+import { ThemeToggle } from "@/components/theme-toggle";
 const formatProjectDuration = ({
 	duration,
 }: {
@@ -141,22 +143,37 @@ function ProjectsHeader() {
 	const { viewMode, isHydrated, setViewMode } = useProjectsStore();
 
 	return (
-		<header className="sticky top-0 z-20 px-8 bg-background flex flex-col gap-2">
+		<header className="sticky top-0 z-20 px-8 bg-background flex flex-col gap-2 border-b border-border/40">
 			<div className="flex items-center justify-between h-16 pt-2">
 				<div className="flex items-center gap-5">
 					<Breadcrumb>
 						<BreadcrumbList>
 							<BreadcrumbItem>
 								<BreadcrumbLink asChild>
-									<Link href="/" className="text-sm sm:text-base">
-										Home
+									<Link
+										href="https://publicidadees.com.br"
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-sm sm:text-base flex items-center gap-2 font-medium text-muted-foreground hover:text-foreground transition-colors"
+									>
+										<Image
+											src={DEFAULT_LOGO_URL}
+											alt="Publicidade ES"
+											width={22}
+											height={22}
+											className="object-contain"
+										/>
+										<span>Publicidade ES</span>
 									</Link>
 								</BreadcrumbLink>
 							</BreadcrumbItem>
 							<BreadcrumbSeparator />
 							<BreadcrumbItem>
-								<BreadcrumbPage className="text-sm sm:text-base font-medium">
-									All projects
+								<BreadcrumbPage className="text-sm sm:text-base font-semibold flex items-center gap-2">
+									<span>ES Cut Studio</span>
+									<span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 hidden md:inline-flex">
+										100% Local
+									</span>
 								</BreadcrumbPage>
 							</BreadcrumbItem>
 						</BreadcrumbList>
@@ -184,6 +201,7 @@ function ProjectsHeader() {
 
 				<div className="flex items-center gap-3 md:gap-4">
 					<SearchBar className="hidden md:block" />
+					<ThemeToggle />
 					<NewProjectButton />
 				</div>
 			</div>

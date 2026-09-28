@@ -17,17 +17,14 @@ type CategoryLinks = Record<Category, FooterLink[]>;
 
 const links: CategoryLinks = {
 	resources: [
-		{ label: "Roadmap", href: "/roadmap" },
-		{ label: "Changelog", href: "/changelog" },
-		{ label: "Blog", href: "/blog" },
-		{ label: "Privacy", href: "/privacy" },
-		{ label: "Terms of use", href: "/terms" },
+		{ label: "Meus Projetos", href: "/projects" },
+		{ label: "Privacidade", href: "/privacy" },
+		{ label: "Termos de Uso", href: "/terms" },
 	],
 	company: [
-		{ label: "Contributors", href: "/contributors" },
-		{ label: "Sponsors", href: "/sponsors" },
-		{ label: "Brand", href: "/brand" },
-		{ label: "About", href: `${SOCIAL_LINKS.github}/blob/main/README.md` },
+		{ label: "Portal Publicidade ES", href: "https://publicidadees.com.br" },
+		{ label: "Hub de Ferramentas", href: "https://publicidadees.com.br/ferramentas" },
+		{ label: "Código Fonte Base (OpenCut)", href: "https://github.com/OpenCut-app/OpenCut" },
 	],
 };
 
@@ -41,49 +38,23 @@ export function Footer() {
 						<div className="mb-4 flex items-center justify-start gap-2">
 							<Image
 								src={DEFAULT_LOGO_URL}
-								alt="OpenCut"
-								width={24}
-								height={24}
-								className="invert dark:invert-0"
+								alt="ES Cut Studio"
+								width={28}
+								height={28}
+								className="object-contain"
 							/>
-							<span className="text-lg font-bold">OpenCut</span>
+							<span className="text-lg font-bold">ES Cut Studio</span>
 						</div>
 						<p className="text-muted-foreground mb-5 text-sm md:text-left">
-							The privacy-first video editor that feels simple to use.
+							O editor de vídeo profissional e 100% privado no seu navegador da Publicidade ES.
 						</p>
-						<div className="flex justify-start gap-3">
-							<Link
-								href={SOCIAL_LINKS.github}
-								className="text-muted-foreground hover:text-foreground transition-colors"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<FaGithub className="size-5" />
-							</Link>
-							<Link
-								href={SOCIAL_LINKS.x}
-								className="text-muted-foreground hover:text-foreground transition-colors"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<RiTwitterXLine className="size-5" />
-							</Link>
-							<Link
-								href={SOCIAL_LINKS.discord}
-								className="text-muted-foreground hover:text-foreground transition-colors"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<RiDiscordFill className="size-5" />
-							</Link>
-						</div>
 					</div>
 
 					<div className="flex items-start justify-start gap-12 py-2">
 						{(Object.keys(links) as Category[]).map((category) => (
 							<div key={category} className="flex flex-col gap-2">
 								<h3 className="text-foreground font-semibold">
-									{capitalizeFirstLetter({ string: category })}
+									{category === "resources" ? "Editor" : "Publicidade ES"}
 								</h3>
 								<ul className="space-y-2 text-sm">
 									{links[category].map((link) => (
@@ -111,10 +82,10 @@ export function Footer() {
 				</div>
 
 				{/* Bottom Section */}
-				<div className="flex flex-col items-start justify-between gap-4 pt-2 md:flex-row">
+				<div className="flex flex-col items-start justify-between gap-4 pt-2 md:flex-row border-t border-border/40">
 					<div className="text-muted-foreground flex items-center gap-4 text-sm">
 						<span>
-							© {new Date().getFullYear()} OpenCut, All Rights Reserved
+							© {new Date().getFullYear()} Publicidade ES — Baseado em Software Livre (OpenCut)
 						</span>
 					</div>
 				</div>
