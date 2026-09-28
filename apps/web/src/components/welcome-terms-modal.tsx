@@ -103,7 +103,7 @@ export function WelcomeTermsModal() {
 								<span>Dica de Desempenho Local</span>
 							</div>
 							<p className="text-xs text-muted-foreground leading-relaxed">
-								Como a renderização utiliza a memória RAM e placa de vídeo da sua máquina (via WebAssembly), recomendamos vídeos de até <strong className="text-foreground">1 GB</strong> para máxima fluidez.
+								Como a renderização utiliza a memória RAM e placa de vídeo da sua máquina (via WebAssembly), recomendamos vídeos de até <strong className="text-foreground">500 MB</strong> para máxima velocidade e resposta instantânea.
 							</p>
 						</div>
 					</div>

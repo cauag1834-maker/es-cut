@@ -105,16 +105,16 @@ export async function processMediaAssets({
 
 		// Limite de segurança para processamento local no navegador
 		// Evita esgotamento da memória RAM da aba do navegador com vídeos gigantes
-		const MAX_RECOMMENDED_BYTES = 1.5 * 1024 * 1024 * 1024; // 1.5 GB
+		const MAX_RECOMMENDED_BYTES = 500 * 1024 * 1024; // 500 MB
 		if (file.size > MAX_RECOMMENDED_BYTES) {
-			toast.error(`Arquivo muito pesado: ${file.name} (${formatStorageBytes({ bytes: file.size })})`, {
-				description: "Para manter a edição fluida e não travar a memória do seu navegador, o limite recomendado é de 1.5 GB por arquivo. Dica: comprima o vídeo ou reduza a resolução antes de importar.",
+			toast.error(`Arquivo acima do limite: ${file.name} (${formatStorageBytes({ bytes: file.size })})`, {
+				description: "Para manter a edição super leve e evitar travamentos na memória do seu navegador, o limite máximo é de 500 MB por arquivo. Dica: comprima o vídeo ou divida-o antes de importar.",
 				duration: 8000,
 			});
 			continue;
-		} else if (file.size > 800 * 1024 * 1024) {
-			toast.warning(`Vídeo grande detectado: ${file.name} (${formatStorageBytes({ bytes: file.size })})`, {
-				description: "O processamento é 100% no seu dispositivo (zero servidor). Vídeos volumosos exigem mais memória local.",
+		} else if (file.size > 200 * 1024 * 1024) {
+			toast.warning(`Vídeo volumoso: ${file.name} (${formatStorageBytes({ bytes: file.size })})`, {
+				description: "O processamento ocorre 100% no seu computador (zero servidor). Vídeos acima de 200 MB podem levar alguns segundos a mais para decodificar.",
 				duration: 6000,
 			});
 		}
