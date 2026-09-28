@@ -10,6 +10,7 @@ import { webEnv } from "@/env/web";
 import { Inter } from "next/font/google";
 
 import { WelcomeTermsModal } from "../components/welcome-terms-modal";
+import { AuthGate } from "../components/auth-gate";
 
 const siteFont = Inter({ subsets: ["latin"] });
 
@@ -49,8 +50,10 @@ export default function RootLayout({
 				>
 					<TooltipProvider>
 						<Toaster />
-						{children}
-						<WelcomeTermsModal />
+						<AuthGate>
+							{children}
+							<WelcomeTermsModal />
+						</AuthGate>
 					</TooltipProvider>
 				</ThemeProvider>
 			</body>

@@ -26,6 +26,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ShortcutsDialog } from "@/actions/components/shortcuts-dialog";
 import Image from "next/image";
 import { cn } from "@/utils/ui";
+import { StudioUserMenu } from "@/components/studio-user-menu";
 
 export function EditorHeader() {
 	return (
@@ -38,6 +39,7 @@ export function EditorHeader() {
 				<FeedbackPopover />
 				<ExportButton />
 				<ThemeToggle />
+				<StudioUserMenu />
 			</nav>
 		</header>
 	);

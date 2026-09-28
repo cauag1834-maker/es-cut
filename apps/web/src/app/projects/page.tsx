@@ -69,6 +69,9 @@ import { cn } from "@/utils/ui";
 import { ChangelogNotification } from "@/changelog/components/changelog-notification";
 import { DEFAULT_LOGO_URL } from "@/site/brand";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { StudioUserMenu } from "@/components/studio-user-menu";
+import { MessageCircle } from "lucide-react";
+
 const formatProjectDuration = ({
 	duration,
 }: {
@@ -199,9 +202,25 @@ function ProjectsHeader() {
 					</div>
 				</div>
 
-				<div className="flex items-center gap-3 md:gap-4">
+				<div className="flex items-center gap-2.5 md:gap-3">
 					<SearchBar className="hidden md:block" />
+					<Link
+						href="https://publicidadees.com.br/comunidade"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="hidden sm:inline-flex"
+					>
+						<Button
+							variant="outline"
+							size="sm"
+							className="h-9 gap-1.5 text-xs font-semibold border-emerald-500/30 text-emerald-500 hover:bg-emerald-500/10 cursor-pointer"
+						>
+							<MessageCircle className="size-3.5" />
+							<span>Comunidade WhatsApp</span>
+						</Button>
+					</Link>
 					<ThemeToggle />
+					<StudioUserMenu />
 					<NewProjectButton />
 				</div>
 			</div>
